@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv/
+venv/
+ENV/
+
+# k6 test outputs & reports (ignore generated reports, keep dashboards)
+reports/*.html
+reports/*.json
+reports/*.xml
+!grafana/provisioning/dashboards/*.json
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
