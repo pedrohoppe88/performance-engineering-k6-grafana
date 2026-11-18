@@ -1,0 +1,42 @@
+name: Performance Quality Gate (k6)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  performance-quality-gate:
+    name: Validate Performance SLAs & Thresholds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: 🚀 Subir Ambiente (sut-api & InfluxDB)
+        run: |
+          docker compose up -d --build sut-api influxdb
+
+      - name: 🩺 Aguardar Healthcheck da API
+        run: |
+          echo "Aguardando o serviço sut-api inicializar e ficar saudável..."
+          timeout 60s bash -c 'until curl -s http://localhost:8000/health | grep -q "healthy"; do sleep 2; done'
+          echo "sut-api está pronta e saudável!"
+
+      - name: 🧪 Executar Smoke Test (Quality Gate 1 - Sanidade)
+        run: |
+          echo "Executando Smoke Test (2 VUs - validação de integridade)..."
+          docker compose run --rm k6 run /scripts/smoke-test.js
+
+      - name: 📈 Executar Load Test (Quality Gate 2 - SLAs & Thresholds)
+        run: |
+          echo "Executando Load Test (até 30 VUs - validação de p95, p99 e taxa de erro)..."
+          docker compose run --rm k6 run /scripts/load-test.js
+
+      - name: 🧹 Encerrar e Limpar Ambiente Docker
+        if: always()
+        run: |
+          docker compose down -v

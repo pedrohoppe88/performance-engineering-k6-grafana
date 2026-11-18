@@ -77,6 +77,9 @@ Compreender o papel de cada ferramenta na pilha de testes é essencial para atua
 
 ```text
 QA K6/
+├── .github/
+│   └── workflows/
+│       └── perf-quality-gate.yml # Pipeline de CI/CD (Quality Gate automatizado com k6)
 ├── api/
 │   ├── Dockerfile            # Configuração da imagem FastAPI com Uvicorn (4 workers)
 │   ├── main.py               # Código-fonte otimizado com I/O assíncrono (asyncio.sleep)
