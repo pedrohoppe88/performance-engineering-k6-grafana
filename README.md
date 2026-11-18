@@ -1,5 +1,11 @@
 # Guia Completo de Engenharia de Performance e Observabilidade — QA & k6
 
+[![Performance Quality Gate](https://github.com/pedrohoppe88/performance-engineering-k6-grafana/actions/workflows/perf-quality-gate.yml/badge.svg)](https://github.com/pedrohoppe88/performance-engineering-k6-grafana/actions/workflows/perf-quality-gate.yml)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![k6](https://img.shields.io/badge/k6-Load%20Testing-7D64FF?logo=k6&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+
 Este repositório contém um ecossistema completo, conteinerizado e autocontido para **Engenharia de Performance, Testes de Carga e Observabilidade em Tempo Real**. 
 
 Projetado especialmente para **Analistas de Qualidade (QAs)** e **Engenheiros de Software**, este ambiente demonstra na prática como planejar, codificar, executar, monitorar e diagnosticar testes de performance em microsserviços modernos utilizando **FastAPI**, **k6**, **InfluxDB** e **Grafana**.
